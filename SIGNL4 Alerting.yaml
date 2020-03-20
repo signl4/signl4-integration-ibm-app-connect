@@ -1,0 +1,53 @@
+$integration: 'http://ibm.com/appconnect/integration/v2/integrationFile'
+integration:
+  type: trigger-action
+  trigger-interfaces:
+    trigger-interface-1:
+      connector-type: asana
+      type: event-trigger
+      triggers:
+        CREATED:
+          input-context:
+            data: Tasks
+          assembly:
+            $ref: '#/integration/assemblies/assembly-1'
+          options:
+            workspace-id: '0000'
+            project: '0000'
+            parentFilter:
+              workspace-id: '0000'
+              project: '0000'
+      account-name: Account 1
+  action-interfaces:
+    action-interface-1:
+      type: api-action
+      business-object: request
+      connector-type: http
+      account-name: Account 1
+      actions:
+        INVOKE: {}
+  assemblies:
+    assembly-1:
+      assembly:
+        execute:
+          - custom-action:
+              name: HTTP Invoke method
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-1'
+              action: INVOKE
+              map:
+                mappings:
+                  - method:
+                      template: POST
+                  - requestBody:
+                      template: >-
+                        {"title": "New Asana Task", "message": "New task:
+                        {{$Trigger.name}}"}
+                  - url:
+                      template: 'https://connect.signl4.com/webhook/<team-secret>'
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+  name: SIGNL4 Alerting
+models: {}
