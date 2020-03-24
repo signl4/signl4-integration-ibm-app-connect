@@ -68,6 +68,10 @@ Now you can create a new flow (Event-driven flow) consisting of two steps:
 
 Our application trigger is an Asana task. This requires an authentication with your existing Asana account. The event will start our flow each time a new Task with the respective properties has been created in Asana.
 
+Neben Asana können Sie auch andere Systeme integrieren, zum Beispiel IBM Maximo, um Teams über neue Service-Anfragen zu informieren.
+
+![IBM Maximo](ibm-app-connect-maximo.png)
+
 4. Configure the HTTP Request  
 
 We send an HTTP Push request to SIGNL4 in order to trigger an alert. The URL is your SIGNL4 webhook URL including your team secret. The request body is the JSON payload. In our case we assemble the body dynamically from the Asana Task data.

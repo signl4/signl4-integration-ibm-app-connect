@@ -69,6 +69,10 @@ Nun können Sie einen neuen Flow (Event-driven flow) anlegen, der aus zwei Schri
 
 Unser Application Event ist ein Asana  Task. Dies erfordert eine Authentifizierung mit Ihrem bestehenden Asana-Konto. Der Event löst unseren Workflow jedes Mal aus, wenn ein neuer Task mit den entsprechenden Eigenschaften in Asana erstellt wurde.
 
+Besides Asana, you can connect other systems as well, for example IBM Maximo to inform teams about new service requests.
+
+![IBM Maximo](ibm-app-connect-maximo.png)
+
 4. HTTP Request konfigurieren  
 
 Wir senden einen HTTP-Push-Request an SIGNL4, um einen Alarm auszulösen. Die URL ist Ihre SIGNL4 Webhook-URL inklusive Ihres Team-Secrets. Der Request-Body enthält die JSON-Daten. In unserem Fall setzen wir den Body dynamisch aus den Asana-Task-Daten zusammen.
